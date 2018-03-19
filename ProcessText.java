@@ -3,8 +3,6 @@ import java.util.Scanner;
 
 public class ProcessText {
 	
-	private final String DELIMITERS = "[\\W\\d_]+";
-	
 	public static void main(String[] args) {
 	Scanner fileScan = new Scanner(System.in);
 	System.out.println("Please enter file name that you would like to get Statistics for. ");
@@ -22,13 +20,18 @@ public class ProcessText {
 		
 	TextStatistics ts = new TextStatistics(fileName);
 	fileScan.close();
-	
-	// gets file Length.
-	/*
+
 	long testLength = ts.getFileLength();
-	System.out.println(testLength + " bytes");
-	*/
+	System.out.println("length is " + testLength + " bytes");
+
+	int wordCount = ts.getWordCount();
+	System.out.println("Word count is " + wordCount);
+
+	int charCount = ts.getCharCount();
+	System.out.println("Char count is " + charCount);
+	
+	ts.readFile();
+	}
 
 	
-	}
 }
