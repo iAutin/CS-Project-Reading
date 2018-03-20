@@ -10,21 +10,22 @@ public class TextStatistics implements TextStatisticsInterface{
 	private static final String DELIMITERS2 = "";
 	private ArrayList<String> wordList = new ArrayList<String>();
 	private ArrayList<String> charList = new ArrayList<String>();
+	private int lineCount = 0;
 	
 	TextStatistics (File fileName) {
 		currentFile = fileName;
 		try {
 			Scanner firstTextScan = new Scanner(fileName);
+			
 			while(firstTextScan.hasNextLine())
 			{	
-				System.out.println("This is a line prob");
-				
+				firstTextScan.useDelimiter(DELIMITERS);
 				while(firstTextScan.hasNext()) {
-					
-					firstTextScan.useDelimiter(DELIMITERS);
 					String token = firstTextScan.next();
 					wordList.add(token);
-				}	
+				}
+				//does nothing but breaks when removed.
+				String line = firstTextScan.nextLine();
 			}
 			firstTextScan.close();
 		} catch (FileNotFoundException e) {
@@ -35,7 +36,6 @@ public class TextStatistics implements TextStatisticsInterface{
 			Scanner SecondTextScan = new Scanner(fileName);
 			while(SecondTextScan.hasNextLine())
 			{	
-				System.out.println("This is a line prob");
 				while(SecondTextScan.hasNext()) {
 					SecondTextScan.useDelimiter(DELIMITERS2);
 					String token = SecondTextScan.next();
@@ -44,10 +44,22 @@ public class TextStatistics implements TextStatisticsInterface{
 			}
 			SecondTextScan.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found!");
 		}
+
+		try {
+			Scanner ThirdTextScan = new Scanner(fileName);
+			while(ThirdTextScan.hasNextLine()){
+				lineCount++;
+				String line = ThirdTextScan.nextLine();
+			}
+			ThirdTextScan.close();
+		} catch (FileNotFoundException e) {
+		}
+
+
 	}
-	
+
+
 	/**
 	 * @return long that lists the files length.
 	 * @author igorautin
@@ -86,7 +98,8 @@ public class TextStatistics implements TextStatisticsInterface{
 	 */
 	public int getLineCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		int lineCountResult = lineCount + 1;
+		return lineCountResult;
 	}
 	/**
 	 * @return the letterCount array with locations [0]..[25] for 'a' through 'z'

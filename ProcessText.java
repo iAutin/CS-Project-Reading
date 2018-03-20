@@ -30,7 +30,9 @@ public class ProcessText {
 	int charCount = ts.getCharCount();
 	System.out.println("Char count is " + charCount);
 	
-	ts.readFile();
+	int lineCount = ts.getLineCount();
+	System.out.println("This text file has  " + lineCount + " lines.");
+	//ts.readFile();
 	}
 
 	
