@@ -11,6 +11,8 @@ public class TextStatistics implements TextStatisticsInterface{
 	private ArrayList<String> wordList = new ArrayList<String>();
 	private ArrayList<String> charList = new ArrayList<String>();
 	private int lineCount = 0;
+	private int letterCounter = 0;
+	private int[] letterCountNumbers = new int[26];
 	
 	TextStatistics (File fileName) {
 		currentFile = fileName;
@@ -55,8 +57,9 @@ public class TextStatistics implements TextStatisticsInterface{
 			ThirdTextScan.close();
 		} catch (FileNotFoundException e) {
 		}
-
-
+		for (int i = 0; i < 26; i++){
+			letterCountNumbers[i] = 0;
+		}
 	}
 
 
@@ -105,8 +108,18 @@ public class TextStatistics implements TextStatisticsInterface{
 	 * @return the letterCount array with locations [0]..[25] for 'a' through 'z'
 	 */
 	public int[] getLetterCount() {
-		// TODO Auto-generated method stub
-		return null;
+		int i = 0;
+		while(i < charList.size()){
+			char letterOrNot = charList.get(i).toLowerCase().charAt(0);
+			int letterTester = (int) letterOrNot;
+			if (letterTester>= 97 && letterTester <=122 ){
+				letterCounter++;
+				letterCountNumbers[(letterTester-97)] = letterCountNumbers[(letterTester-97)]+1;
+			}
+			i++;
+		}
+		System.out.println("There are " + letterCounter + " letters");
+		return letterCountNumbers;
 	}
 	/**
 	 * @return the wordLengthCount array with locations [0]..[23] with location [i]

@@ -33,6 +33,9 @@ public class ProcessText {
 	int lineCount = ts.getLineCount();
 	System.out.println("This text file has  " + lineCount + " lines.");
 	//ts.readFile();
+
+
+	int[] test = ts.getLetterCount();
 	}
 
 	
